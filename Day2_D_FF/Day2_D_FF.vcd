@@ -1,0 +1,81 @@
+$date
+	Wed Nov 27 22:47:27 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module Day2_D_FF_TB $end
+$var wire 1 ! q_syncrst_o $end
+$var wire 1 " q_norst_o $end
+$var wire 1 # q_asyncrst_o $end
+$var reg 1 $ clk $end
+$var reg 1 % d_i $end
+$var reg 1 & reset $end
+$scope module DAY2 $end
+$var wire 1 $ clk $end
+$var wire 1 % d_i $end
+$var wire 1 & reset $end
+$var reg 1 # q_asyncrst_o $end
+$var reg 1 " q_norst_o $end
+$var reg 1 ! q_syncrst_o $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+1&
+0%
+1$
+0#
+0"
+0!
+$end
+#5
+0$
+#10
+0&
+1$
+#15
+0$
+#20
+1#
+1"
+1!
+1%
+1$
+#25
+0$
+#30
+1$
+#35
+0$
+#40
+1$
+#45
+0#
+1&
+0$
+#50
+0!
+1$
+#55
+0$
+#60
+1#
+0&
+1$
+#65
+0$
+#70
+1!
+1$
+#75
+0$
+#80
+1$
