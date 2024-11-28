@@ -1,0 +1,110 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2009.vpi";
+S_000001b8ddab6fd0 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_000001b8ddab87d0 .scope module, "day3_tb" "day3_tb" 3 4;
+ .timescale -9 -9;
+v000001b8ddac6d00_0 .var "a_i", 0 0;
+v000001b8ddac4520_0 .var "clk", 0 0;
+v000001b8ddb0f440_0 .net "dual_edge_o", 0 0, L_000001b8ddab6130;  1 drivers
+v000001b8ddb0fee0_0 .net "falling_edge_o", 0 0, L_000001b8ddab5e90;  1 drivers
+v000001b8ddb0f4e0_0 .var "reset", 0 0;
+v000001b8ddb0f580_0 .net "rising_edge_o", 0 0, L_000001b8ddab6210;  1 drivers
+E_000001b8ddac98f0 .event posedge, v000001b8ddab8960_0;
+S_000001b8ddac6990 .scope module, "DAY3" "day3" 3 15, 4 3 0, S_000001b8ddab87d0;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "reset";
+    .port_info 2 /INPUT 1 "a_i";
+    .port_info 3 /OUTPUT 1 "rising_edge_o";
+    .port_info 4 /OUTPUT 1 "falling_edge_o";
+    .port_info 5 /OUTPUT 1 "dual_edge_o";
+L_000001b8ddab6210 .functor AND 1, v000001b8ddac6d00_0, L_000001b8ddb0fbc0, C4<1>, C4<1>;
+L_000001b8ddab5e90 .functor AND 1, L_000001b8ddb0f300, v000001b8dda0be50_0, C4<1>, C4<1>;
+L_000001b8ddab6130 .functor XOR 1, v000001b8ddac6d00_0, v000001b8dda0be50_0, C4<0>, C4<0>;
+v000001b8dda930d0_0 .net *"_ivl_1", 0 0, L_000001b8ddb0fbc0;  1 drivers
+v000001b8dda92c50_0 .net *"_ivl_5", 0 0, L_000001b8ddb0f300;  1 drivers
+v000001b8ddab7160_0 .net "a_i", 0 0, v000001b8ddac6d00_0;  1 drivers
+v000001b8ddab8960_0 .net "clk", 0 0, v000001b8ddac4520_0;  1 drivers
+v000001b8dda0be50_0 .var "d_q", 0 0;
+v000001b8dda0bef0_0 .net "dual_edge_o", 0 0, L_000001b8ddab6130;  alias, 1 drivers
+v000001b8ddac6b20_0 .net "falling_edge_o", 0 0, L_000001b8ddab5e90;  alias, 1 drivers
+v000001b8ddac6bc0_0 .net "reset", 0 0, v000001b8ddb0f4e0_0;  1 drivers
+v000001b8ddac6c60_0 .net "rising_edge_o", 0 0, L_000001b8ddab6210;  alias, 1 drivers
+E_000001b8ddac9470 .event posedge, v000001b8ddac6bc0_0, v000001b8ddab8960_0;
+L_000001b8ddb0fbc0 .reduce/nor v000001b8dda0be50_0;
+L_000001b8ddb0f300 .reduce/nor v000001b8ddac6d00_0;
+    .scope S_000001b8ddac6990;
+T_0 ;
+    %wait E_000001b8ddac9470;
+    %load/vec4 v000001b8ddac6bc0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v000001b8dda0be50_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v000001b8ddab7160_0;
+    %assign/vec4 v000001b8dda0be50_0, 0;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_000001b8ddab87d0;
+T_1 ;
+    %vpi_call/w 3 18 "$dumpfile", "Day3_Edge_Detect_TB.vcd" {0 0 0};
+    %vpi_call/w 3 19 "$dumpvars", 32'sb00000000000000000000000000000000, S_000001b8ddab87d0 {0 0 0};
+    %vpi_call/w 3 20 "$dumpvars", 32'sb00000000000000000000000000000000, v000001b8dda0be50_0 {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_000001b8ddab87d0;
+T_2 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000001b8ddac4520_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v000001b8ddac4520_0, 0, 1;
+    %delay 5, 0;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_000001b8ddab87d0;
+T_3 ;
+    %vpi_call/w 3 31 "$display", "Starting Simulation \012" {0 0 0};
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v000001b8ddb0f4e0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000001b8ddac6d00_0, 0, 1;
+    %wait E_000001b8ddac98f0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000001b8ddb0f4e0_0, 0, 1;
+    %delay 7, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v000001b8ddac6d00_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000001b8ddac6d00_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v000001b8ddac6d00_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v000001b8ddac6d00_0, 0, 1;
+    %delay 3, 0;
+    %vpi_call/w 3 64 "$display", "Simulation Complete" {0 0 0};
+    %vpi_call/w 3 65 "$finish" {0 0 0};
+    %end;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    ".\Day3_Edge_Detect_TB.v";
+    "./Day3_Edge_Detect.v";
