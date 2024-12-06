@@ -1,0 +1,37 @@
+$date
+	Fri Nov 15 16:09:37 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module day5_tb $end
+$var wire 8 ! cnt_o [7:0] $end
+$var reg 1 " clk $end
+$var reg 1 # reset $end
+$var integer 32 $ count_width [31:0] $end
+$scope module UUT $end
+$var wire 1 " clk $end
+$var wire 1 # reset $end
+$var reg 8 % cnt_o [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b1 %
+b0 $
+1#
+0"
+b1 !
+$end
+#5
+1"
+#10
+0"
+0#
