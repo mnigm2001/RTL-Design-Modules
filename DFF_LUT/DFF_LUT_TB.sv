@@ -20,6 +20,12 @@ module DFF_LUT_TB ();
         $dumpvars(0, DFF_LUT_TB);
     end
 
+
+    // Stimulus
+    initial begin
+
+    end
+
     initial begin
         config_in = 1'b0;
         select = 2'b0;
