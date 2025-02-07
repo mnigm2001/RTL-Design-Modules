@@ -19,28 +19,29 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+/*
+    For single digit, change an to single bit
+*/
 
-
-module SevenSegment(
+module SevenSegment #(
+    parameter int CLK_RATE = 100_000_000,
+    parameter int CLK_DIV_FACTOR = 3
+)(
     input clk,
     output dp,
     output [0:3] an,
     output logic [0:6] seg
     );
-    
-    logic clk_1of3;
-    ClockDivider #() ClockDivider_3 (
-        .clk_in(clk),
-        .clk_out(clk_1of3)
-    );
-    
-    // Clock Divide: 1/3 of a second for 100Mhz clk
-    logic [24:0] clk_2of3 = 0;
-    always @(posedge clk) clk_2of3 <= clk_2of3 + 1;
 
-    // Count from 0-9 - 4 bits
+    localparam INTERM_CLK_WIDTH = $clog2(integer'(CLK_RATE/CLK_DIV_FACTOR));
+    
+    // 1/DIV_FACTOR of a second for the given CLK_RATE
+    logic [INTERM_CLK_WIDTH:0] clk_xofy = 0;
+    always @(posedge clk) clk_xofy <= clk_xofy + 1;
+
+    // Count from 0-9 using intermediate clock
     logic [3:0] count = 0;
-    always @ (posedge clk_2of3[24]) count <= count + 1;
+    always @ (posedge clk_xofy[24]) count <= count + 1;
     
     // Drive low DP and 4th segment display
     assign dp = 1'b0;

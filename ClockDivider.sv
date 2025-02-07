@@ -22,13 +22,36 @@
 
 module ClockDivider #(
     parameter int CLK_RATE = 100_000_000,
-    parameter real DIV_FACTOR = 3
+    parameter int DIV_FACTOR = 2
     
 )(
-    input clk_in,
-    output clk_out
+    input logic reset,
+    input logic clk_in,
+    output logic clk_out
     );
-    /*
+    
+    logic[$clog2(DIV_FACTOR)-1:0] count = 0;
+    always @(posedge clk_in or posedge reset) begin
+     if (reset) begin
+        count <= 0;
+        clk_out <= 1'b1;
+     end else begin
+     
+        if (count == (DIV_FACTOR-1)) begin
+            clk_out <= 1'b1;
+            count <= 0;
+        end
+        else begin 
+            clk_out <= 1'b0;
+            count <= count + 1;
+        end
+    end 
+    end
+    
+endmodule
+
+
+/*
         3 -> 1/3 -- 1.5  -> 1/1.5 -> 2/3
         100Mhz/x = DIV_FACTOR
         x = 100MHz/DivFactor
@@ -36,11 +59,3 @@ module ClockDivider #(
         
         TODO: Python - plot the deviation 
     */
-    localparam int count_width = $clog2(CLK_RATE/DIV_FACTOR);
-    
-    logic[0:count_width] count;
-    always @(posedge clk_in) count <= count + 1;
-    
-    assign clk_out = count[count_width];
-    
-endmodule
